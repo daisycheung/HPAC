@@ -1,0 +1,47 @@
+
+R version 3.2.5 (2016-04-14) -- "Very, Very Secure Dishes"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> #library(gputools)
+> library(gmatrix)
+Now using device 0 - "Tesla K40m"
+Starting cublas on device 0.
+Creating new states on device 0.
+
+Attaching package: ‘gmatrix’
+
+The following object is masked from ‘package:base’:
+
+    svd
+
+> 
+>      ORDER = 8192 
+> # Rprof() 
+>     cputime <- system.time({A = gmatrix(rnorm(ORDER^2),ORDER,ORDER)
++     B = gmatrix(rnorm(ORDER^2),ORDER,ORDER)
++     C=gmatrix(0,ORDER,ORDER)
++     gmm(A,B,C)})[3]
+> # Rprof(NULL)
+>   cat("Size: ",ORDER,"Elapsed Time: ",cputime,"\n")
+Size:  8192 Elapsed Time:  17.969 
+> 
+> proc.time()
+   user  system elapsed 
+ 17.909   2.489  24.591 
